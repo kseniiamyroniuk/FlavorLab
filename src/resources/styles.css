@@ -1,0 +1,219 @@
+* {
+    -fx-font-family: "Tenor Sans";
+}
+
+/* ROOT */
+
+.root {
+    -fx-background-color: #fefdeb;
+}
+
+/* TABS */
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: #ffffff;
+}
+
+.tab {
+    -fx-background-color: #F7F9EE;
+    -fx-padding: 8 20;
+    -fx-background-radius: 12 12 0 0;
+}
+
+.tab:selected {
+    -fx-background-color: #DDEB9D;
+}
+
+.tab .tab-label {
+    -fx-text-fill: #708240;
+    -fx-font-size: 13px;
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: #4F5D2F;
+    -fx-font-weight: bold;
+}
+
+/* CARDS */
+
+.card {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 18;
+    -fx-padding: 16;
+
+    -fx-effect: dropshadow(gaussian, rgba(112,130,64,0.14), 12, 0, 0, 4);
+}
+
+.card:hover {
+    -fx-effect: none;
+    -fx-border-color: #C5D86D;
+    -fx-border-radius: 18;
+    -fx-cursor: hand;
+}
+
+/* CHIP */
+
+.allergy-chip {
+    -fx-background-color: #708240;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 3;
+    -fx-padding: 6 16;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+.info-chip {
+    -fx-background-color: #EAF4C8;
+    -fx-text-fill: #4F5D2F;
+    -fx-background-radius: 3;
+    -fx-padding: 6 16;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+/* REVIEW */
+
+.review-card {
+    -fx-background-color: #F6FAD9;
+
+    -fx-background-radius: 14;
+
+    -fx-border-color: #DDEB9D;
+    -fx-border-radius: 14;
+
+    -fx-padding: 12;
+}
+
+.review-author {
+    -fx-text-fill: #4F5D2F;
+
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.review-text {
+    -fx-text-fill: #708240;
+    -fx-font-size: 13px;
+}
+
+/* TYPOGRAPHY */
+
+.title-label {
+    -fx-text-fill: #4F5D2F;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.subtitle-label {
+    -fx-text-fill: #708240;
+    -fx-font-size: 18px;
+}
+
+.small-label {
+    -fx-text-fill: #8D9470;
+    -fx-font-size: 14px;
+}
+
+/* PRIMARY BUTTON */
+
+.primary-button {
+    -fx-background-color: #9bbc1e;
+    -fx-text-fill: #FFFFFF;
+
+    -fx-font-weight: bold;
+
+    -fx-background-radius: 14;
+    -fx-padding: 10 24;
+
+    -fx-cursor: hand;
+
+    -fx-effect: dropshadow(gaussian, rgba(167,201,87,0.30), 10, 0, 0, 3);
+}
+
+.primary-button:hover {
+    -fx-background-color: #7d8f3f;
+}
+
+/* SECONDARY BUTTON */
+
+.secondary-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #708240;
+    -fx-border-color: #A7C957;
+    -fx-border-radius: 24;
+    -fx-background-radius: 24;
+    -fx-padding: 8 20;
+    -fx-cursor: hand;
+}
+
+.secondary-button:hover {
+    -fx-background-color: #F3F8D7;
+}
+
+
+.saved-button {
+    -fx-background-color: #F3F8D7;
+}
+
+/* INPUTS */
+
+.text-field {
+    -fx-background-color: #F8FBEF;
+
+    -fx-text-fill: #4F5D2F;
+
+    -fx-border-color: #C5D86D;
+
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+
+    -fx-padding: 8 12;
+
+    -fx-prompt-text-fill: #AAB38B;
+}
+
+.combo-box {
+    -fx-background-color: #F8FBEF;
+
+    -fx-text-fill: #707a5c;
+
+    -fx-border-color: #C5D86D;
+
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+
+    -fx-padding: 2;
+
+    -fx-prompt-text-fill: #AAB38B;
+}
+
+.name-field {
+    -fx-background-color: #E4ECC3;
+    -fx-text-fill: #4F5D2F;
+    -fx-border-color: #C5D86D;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 8 12;
+    -fx-prompt-text-fill: #707a5c;
+}
+
+.text-field:focused, .combo-box:focused {
+    -fx-border-color: #A7C957;
+
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(167,201,87,0.20), 8, 0, 0, 1);
+}
+
+/* LISTS */
+
+.list-view {
+    -fx-background-color: transparent;
+}
+
+/* SEPARATORS */
+
+.separator .line {
+    -fx-border-color: #E4ECC3;
+}
+
