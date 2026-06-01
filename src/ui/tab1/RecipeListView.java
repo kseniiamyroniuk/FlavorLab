@@ -62,6 +62,7 @@ public class RecipeListView extends BorderPane {
                 : RecipeRepository.search(query);
 
         // фільтруємо - прибираємо мої та збережені
+        //
         List<Recipe> filtered = all.stream()
                 .filter(r -> {
                     if (currentUser == null) return true;

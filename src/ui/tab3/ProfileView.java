@@ -15,12 +15,12 @@ import model.User;
 import ui.common.RecipeDetailView;
 
 public class ProfileView extends BorderPane {
-    private final Label myCountLabel    = new Label();
+    private final Label myCountLabel = new Label();
     private final Label savedCountLabel = new Label();
     private final Label totalCountLabel = new Label();
 
     private final User user;
-    private final VBox myRecipesList    = new VBox(10);
+    private final VBox myRecipesList = new VBox(10);
     private final VBox savedRecipesList = new VBox(10);
 
     private TabPane tabPane;
@@ -44,7 +44,6 @@ public class ProfileView extends BorderPane {
         return tabPane;
     }
 
-    //  showProfile просто повертає існуючий tabPane
     public void showProfile() {
         setCenter(tabPane);
         refreshMyRecipes();
@@ -61,7 +60,7 @@ public class ProfileView extends BorderPane {
         setCenter(buildTabs());
     }
 
-    // ХЕДЕР — аватарка + ім'я + статистика
+    // ХЕДЕР - аватарка + ім'я + статистика
 
     private VBox buildHeader() {
         String initials = user != null && !user.getName().isBlank()
@@ -84,8 +83,8 @@ public class ProfileView extends BorderPane {
 
         HBox stats = new HBox(24,
                 statChip("Моїх рецептів", myCountLabel),
-                statChip("♥ Збережених",     savedCountLabel),
-                statChip("☕ Всього в базі",  totalCountLabel)
+                statChip("♥ Збережених", savedCountLabel),
+                statChip("Всього в базі", totalCountLabel)
         );
         stats.setAlignment(Pos.CENTER_LEFT);
         stats.setPadding(new Insets(8, 0, 0, 0));
@@ -102,7 +101,7 @@ public class ProfileView extends BorderPane {
     }
 
     private void refreshStats() {
-        int myCount    = user != null ? user.getMyRecipes().size()    : 0;
+        int myCount = user != null ? user.getMyRecipes().size() : 0;
         int savedCount = user != null ? user.getSavedRecipes().size() : 0;
         int totalCount = RecipeRepository.getAll().size();
         myCountLabel.setText(String.valueOf(myCount));
@@ -136,6 +135,8 @@ public class ProfileView extends BorderPane {
     }
 
     // ЗБЕРЕЖЕНІ РЕЦЕПТИ
+
+
     private ScrollPane buildSavedRecipes() {
         refreshSavedRecipes();
 
@@ -193,7 +194,7 @@ public class ProfileView extends BorderPane {
                 refreshStats();
             });
         } else {
-            actionBtn = new Button("🗑 Видалити");
+            actionBtn = new Button("Видалити");
             actionBtn.setStyle(
                     "-fx-border-color: #e07b54; -fx-text-fill: #e07b54;" +
                             "-fx-background-color: transparent; -fx-border-radius: 24;" +
@@ -216,7 +217,7 @@ public class ProfileView extends BorderPane {
                         "-fx-cursor: hand;"
         );
 
-        // клік на картку — відкриває детальний перегляд
+        // клік на картку відкриває детальний перегляд
         card.setOnMouseClicked(e -> {
             // ігноруємо якщо клікнули на кнопку
             if (e.getTarget() instanceof Button) return;

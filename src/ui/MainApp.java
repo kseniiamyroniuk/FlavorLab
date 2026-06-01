@@ -16,17 +16,17 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) {
         Font.loadFont(
-                getClass().getResourceAsStream(".././resources/TenorSans-Regular.ttf"), 14
+                getClass().getResourceAsStream("/TenorSans-Regular.ttf"), 14
         );
 
         SampleData.load();
 
-        RecipeListView  recipeListView  = new RecipeListView();
-        RecipeBuilderView builderView   = new RecipeBuilderView();
-        ProfileView     profileView     = new ProfileView();
+        RecipeListView recipeListView = new RecipeListView();
+        RecipeBuilderView builderView = new RecipeBuilderView();
+        ProfileView profileView = new ProfileView();
 
-        Tab tab1 = new Tab("Меню",    recipeListView);
-        Tab tab2 = new Tab("Рецепт",  builderView);
+        Tab tab1 = new Tab("Меню", recipeListView);
+        Tab tab2 = new Tab("Рецепт", builderView);
         Tab tab3 = new Tab("Профіль", profileView);
 
         TabPane tabPane = new TabPane();
@@ -41,7 +41,7 @@ public class MainApp extends Application {
 
         Scene scene = new Scene(tabPane, 900, 700);
         scene.getStylesheets().add(
-                getClass().getResource("../resources/styles.css").toExternalForm()
+                getClass().getResource("/styles.css").toExternalForm()
         );
 
         stage.setTitle("FlavorLab");
@@ -51,5 +51,7 @@ public class MainApp extends Application {
 
     public static void main(String[] args) {
         launch(args);
+
+
     }
 }

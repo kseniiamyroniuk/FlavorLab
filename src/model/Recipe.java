@@ -38,7 +38,7 @@ public class Recipe {
         reviews.add(review);
     }
 
-    // we calculate average rating for a Recipe and if there's no reviews we make it 0
+    // ми вираховуємо середній рейтинг для рецепту та якщо вігуків та оцінок ще немає, то ставимо оцінку 0
     public double averageRating() {
         if (reviews.isEmpty()) return 0;
         return reviews.stream()
@@ -54,7 +54,7 @@ public class Recipe {
         }
     }
 
-    // getters
+    // гетери
     public String getName()                        { return name; }
     public List<RecipeIngredient> getIngredients() { return ingredients; }
     public String getOrigin()                      { return origin; }
@@ -66,7 +66,7 @@ public class Recipe {
     public List<Review> getReviews()               { return reviews; }
     public User getAuthor()                        { return author; }
 
-    // setters
+    // сетери
     public void setCalories(double calories)       { this.calories = calories; }
     public void setCostUah(double costUah)         { this.costUah = costUah; }
     public void setAuthor(User author)             { this.author = author; }

@@ -57,9 +57,9 @@ public class RecipeBuilderView extends BorderPane {
         categoryListRef = categoryList;
         categoryList.setPadding(new Insets(8, 0, 0, 0));
 
-
         Map<String, List<Map.Entry<String, Ingredient>>> grouped = new LinkedHashMap<>();
         for (String cat : CATEGORIES) grouped.put(cat, new ArrayList<>());
+
         for (Map.Entry<String, Ingredient> entry : IngredientRepository.getAll().entrySet()) {
             String cat = entry.getValue().getCategory();
             if (grouped.containsKey(cat)) grouped.get(cat).add(entry);
@@ -169,7 +169,6 @@ public class RecipeBuilderView extends BorderPane {
 
             double base = ing.getDefaultVolumeMl();
             boolean isMilk = ing.getCategory().equals("milk");
-            boolean isSmall = base <= 30;
 
             Label volLabel = new Label(String.format("%.0f мл", entry.getValue()));
             volLabel.setStyle("-fx-text-fill: #8D9470; -fx-font-size: 12px; -fx-min-width: 40;");
@@ -200,8 +199,7 @@ public class RecipeBuilderView extends BorderPane {
                     });
                 }
                 controls = new HBox(6, s, m, l, xl, volLabel);
-
-            } else if (isSmall) {
+            } else {
                 ToggleButton x1 = portionBtn("x1", base, portionGroup);
                 ToggleButton x2 = portionBtn("x2", base * 2, portionGroup);
                 ToggleButton x3 = portionBtn("x3", base * 3, portionGroup);
@@ -222,19 +220,6 @@ public class RecipeBuilderView extends BorderPane {
                     });
                 }
                 controls = new HBox(6, x1, x2, x3, volLabel);
-
-            } else {
-                // слайдер для тоніків, пюре, піни
-                Slider slider = new Slider(base * 0.5, base * 3, entry.getValue());
-                slider.setPrefWidth(120);
-                slider.setStyle("-fx-accent: #A7C957;");
-
-                slider.valueProperty().addListener((obs, old, val) -> {
-                    selected.put(entry.getKey(), val.doubleValue());
-                    volLabel.setText(String.format("%.0f мл", val.doubleValue()));
-                    updatePreview();
-                });
-                controls = new HBox(8, slider, volLabel);
             }
 
             controls.setAlignment(Pos.CENTER_LEFT);
@@ -293,7 +278,6 @@ public class RecipeBuilderView extends BorderPane {
         Label brewLabel = new Label("Спосіб приготування");
         brewLabel.getStyleClass().add("small-label");
 
-        // мітка що показує обраний обʼєм кави
         coffeeInfoLabel.getStyleClass().add("small-label");
         coffeeInfoLabel.setStyle("-fx-text-fill: #708240;");
         updateCoffeeInfo();
@@ -384,7 +368,6 @@ public class RecipeBuilderView extends BorderPane {
 
         spicyLabel.setVisible(profile.isSpicyAccent());
         spicyLabel.setManaged(profile.isSpicyAccent());
-
 
         double marketPrice = RecipeUtils.marketPrice(temp);
         double totalCal    = RecipeUtils.totalCalories(temp);

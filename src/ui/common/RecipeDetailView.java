@@ -41,7 +41,7 @@ public class RecipeDetailView extends VBox {
         title.getStyleClass().add("title-label");
 
         String authorName = recipe.getAuthor() != null
-                ? recipe.getAuthor().getName() : "Невідомо"; // якщо автор не null то іʼмя, інакше - Невідомо
+                ? recipe.getAuthor().getName() : "Невідомо";
         Label author = new Label("Автор: " + authorName);
         author.getStyleClass().add("small-label");
 

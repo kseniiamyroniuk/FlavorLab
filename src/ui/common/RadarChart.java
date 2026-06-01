@@ -13,12 +13,13 @@ public class RadarChart extends Canvas {
     };
     private static final int N = LABELS.length;
 
-    private static final Color COLOR_GRID    = Color.web("#8D9470");
-    private static final Color COLOR_EMPTY   = Color.web("#C5D86D");
-    private static final Color COLOR_FILL    = Color.web("#EAF4C8", 0.3);
-    private static final Color COLOR_STROKE  = Color.web("#708240");
-    private static final Color COLOR_DOT     = Color.web("#708240");
-    private static final Color COLOR_LABEL   = Color.web("#888888");
+    private static final Color COLOR_GRID = Color.web("#8D9470");
+    private static final Color COLOR_EMPTY = Color.web("#C5D86D");
+    private static final Color COLOR_FILL = Color.web("#EAF4C8", 0.3);
+    private static final Color COLOR_STROKE = Color.web("#708240");
+    private static final Color COLOR_DOT = Color.web("#708240");
+    private static final Color COLOR_LABEL = Color.web("#888888");
+
     public RadarChart(double size) {
         super(size, size);
         drawEmpty();
@@ -51,9 +52,7 @@ public class RadarChart extends Canvas {
     }
 
     // логіка побудови chart
-
-    private void drawGrid(GraphicsContext gc, double cx, double cy,
-                          double maxR, Color gridColor) {
+    private void drawGrid(GraphicsContext gc, double cx, double cy, double maxR, Color gridColor) {
         gc.setStroke(gridColor);
         gc.setLineWidth(1);
 
@@ -70,15 +69,14 @@ public class RadarChart extends Canvas {
 
         for (int i = 0; i < N; i++) {
             double angle = angle(i);
-            gc.strokeLine(cx, cy,
-                    cx + maxR * Math.cos(angle),
-                    cy - maxR * Math.sin(angle));
+            gc.strokeLine(cx, cy, cx + maxR * Math.cos(angle), cy - maxR * Math.sin(angle));
         }
     }
 
     private void drawLabels(GraphicsContext gc, double cx, double cy,
                             double maxR, boolean spicyAccent) {
         gc.setFont(Font.font(10));
+
 
         for (int i = 0; i < N; i++) {
             double angle = angle(i);
