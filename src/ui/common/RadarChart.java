@@ -30,12 +30,12 @@ public class RadarChart extends Canvas {
         gc.clearRect(0, 0, getWidth(), getHeight());
 
         double[] values = toValues(profile);
-        double cx = getWidth()  / 2;
+        double cx = getWidth() / 2;
         double cy = getHeight() / 2;
         double maxR = cx - 45;
 
         drawGrid(gc, cx, cy, maxR, COLOR_GRID);
-        drawLabels(gc, cx, cy, maxR, profile.isSpicyAccent());
+        drawLabels(gc, cx, cy, maxR);
         drawProfile(gc, cx, cy, maxR, values);
     }
 
@@ -43,12 +43,12 @@ public class RadarChart extends Canvas {
         GraphicsContext gc = getGraphicsContext2D();
         gc.clearRect(0, 0, getWidth(), getHeight());
 
-        double cx = getWidth()  / 2;
+        double cx = getWidth() / 2;
         double cy = getHeight() / 2;
         double maxR = cx - 45;
 
         drawGrid(gc, cx, cy, maxR, COLOR_EMPTY);
-        drawLabels(gc, cx, cy, maxR, false);
+        drawLabels(gc, cx, cy, maxR);
     }
 
     // логіка побудови chart
@@ -74,7 +74,7 @@ public class RadarChart extends Canvas {
     }
 
     private void drawLabels(GraphicsContext gc, double cx, double cy,
-                            double maxR, boolean spicyAccent) {
+                            double maxR) {
         gc.setFont(Font.font(10));
 
 

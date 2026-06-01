@@ -15,7 +15,15 @@ public class Review {
         this.comment = comment;
     }
 
-    public User getAuthor()   { return author; }
-    public int getRating()    { return rating; }
-    public String getComment(){ return comment; }
+    public User getAuthor() {
+        return author;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public String getComment() {
+        return comment;
+    }
 }

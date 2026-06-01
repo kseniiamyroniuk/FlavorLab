@@ -6,7 +6,7 @@ public class TempModifier {
 
     // acidity | sweetness | bitterness | fruitiness | creaminess
     private static final Map<String, double[]> MODIFIERS = Map.of(
-            "hot",  new double[]{1.1, 0.9, 1.1, 1.0, 1.0},
+            "hot", new double[]{1.1, 0.9, 1.1, 1.0, 1.0},
             "cold", new double[]{0.8, 1.2, 0.7, 1.0, 1.1}
     );
 

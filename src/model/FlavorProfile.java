@@ -7,16 +7,15 @@ public class FlavorProfile {
     private double bitterness;
     private double fruitiness;
     private double creaminess;
-    private double caffeine;
+
     private boolean spicyAccent;
 
-    public FlavorProfile(double acidity, double sweetness, double bitterness, double fruitiness, double creaminess, double caffeine, boolean spicyAccent) {
+    public FlavorProfile(double acidity, double sweetness, double bitterness, double fruitiness, double creaminess, boolean spicyAccent) {
         this.acidity = acidity;
         this.sweetness = sweetness;
         this.bitterness = bitterness;
         this.fruitiness = fruitiness;
         this.creaminess = creaminess;
-        this.caffeine = caffeine;
         this.spicyAccent = spicyAccent;
     }
 
@@ -38,10 +37,6 @@ public class FlavorProfile {
 
     public double getCreaminess() {
         return creaminess;
-    }
-
-    public double getCaffeine() {
-        return caffeine;
     }
 
     public boolean isSpicyAccent() {

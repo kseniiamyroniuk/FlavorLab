@@ -8,7 +8,7 @@ public class SampleData {
 
     public static void load() {
         User kseniia = new User("Kseniia", null);
-        User barista  = new User("Barista Pro", null);
+        User barista = new User("Barista Pro", null);
         UserRepository.add(kseniia);
         UserRepository.add(barista);
         UserRepository.setCurrentUser(kseniia);
@@ -16,7 +16,7 @@ public class SampleData {
         Recipe flatWhite = new Recipe(
                 "Flat White",
                 List.of(
-                        new RecipeIngredient(IngredientRepository.get("espresso"),       50),
+                        new RecipeIngredient(IngredientRepository.get("espresso"), 50),
                         new RecipeIngredient(IngredientRepository.get("вівсяне_молоко"), 150)
                 ),
                 "ethiopia", "espresso", "hot"
@@ -30,8 +30,8 @@ public class SampleData {
         Recipe mangoColdBrew = new Recipe(
                 "Манго Cold Brew",
                 List.of(
-                        new RecipeIngredient(IngredientRepository.get("cold_brew"),      150),
-                        new RecipeIngredient(IngredientRepository.get("манго"),           50),
+                        new RecipeIngredient(IngredientRepository.get("cold_brew"), 150),
+                        new RecipeIngredient(IngredientRepository.get("манго"), 50),
                         new RecipeIngredient(IngredientRepository.get("кокосове_молоко"), 30)
                 ),
                 "colombia", "cold_brew", "cold"
@@ -45,9 +45,9 @@ public class SampleData {
         Recipe lavenderLatte = new Recipe(
                 "Лавандове Лате",
                 List.of(
-                        new RecipeIngredient(IngredientRepository.get("espresso"),    50),
+                        new RecipeIngredient(IngredientRepository.get("espresso"), 50),
                         new RecipeIngredient(IngredientRepository.get("цільне_молоко"), 180),
-                        new RecipeIngredient(IngredientRepository.get("лаванда"),     20)
+                        new RecipeIngredient(IngredientRepository.get("лаванда"), 20)
                 ),
                 "kenya", "espresso", "hot"
         );
@@ -61,10 +61,10 @@ public class SampleData {
         Recipe raspberryCaramel = new Recipe(
                 "Малинова карамель",
                 List.of(
-                        new RecipeIngredient(IngredientRepository.get("filter_coffee"),  200),
+                        new RecipeIngredient(IngredientRepository.get("filter_coffee"), 200),
                         new RecipeIngredient(IngredientRepository.get("вівсяне_молоко"), 150),
-                        new RecipeIngredient(IngredientRepository.get("карамель"),        30),
-                        new RecipeIngredient(IngredientRepository.get("малина"),          40)
+                        new RecipeIngredient(IngredientRepository.get("карамель"), 30),
+                        new RecipeIngredient(IngredientRepository.get("малина"), 40)
                 ),
                 "ethiopia", "filter", "cold"
         );
@@ -77,9 +77,9 @@ public class SampleData {
         Recipe citrusTonic = new Recipe(
                 "Цитрусове Tonic Espresso",
                 List.of(
-                        new RecipeIngredient(IngredientRepository.get("espresso"),       50),
-                        new RecipeIngredient(IngredientRepository.get("тонік_цитрус"),  150),
-                        new RecipeIngredient(IngredientRepository.get("цедра_апельсина"),10)
+                        new RecipeIngredient(IngredientRepository.get("espresso"), 50),
+                        new RecipeIngredient(IngredientRepository.get("тонік_цитрус"), 150),
+                        new RecipeIngredient(IngredientRepository.get("цедра_апельсина"), 10)
                 ),
                 "ethiopia", "espresso", "cold"
         );
@@ -91,9 +91,9 @@ public class SampleData {
         Recipe pistachioLatte = new Recipe(
                 "Фісташкове крем лате",
                 List.of(
-                        new RecipeIngredient(IngredientRepository.get("espresso"),          50),
+                        new RecipeIngredient(IngredientRepository.get("espresso"), 50),
                         new RecipeIngredient(IngredientRepository.get("фісташкове_молоко"), 180),
-                        new RecipeIngredient(IngredientRepository.get("фісташка"),          20)
+                        new RecipeIngredient(IngredientRepository.get("фісташка"), 20)
                 ),
                 "brazil", "espresso", "hot"
         );
@@ -106,9 +106,9 @@ public class SampleData {
         Recipe honeyCardamom = new Recipe(
                 "Медовий кардамоновий V60",
                 List.of(
-                        new RecipeIngredient(IngredientRepository.get("v60"),       250),
-                        new RecipeIngredient(IngredientRepository.get("мед"),        15),
-                        new RecipeIngredient(IngredientRepository.get("кардамон"),    5)
+                        new RecipeIngredient(IngredientRepository.get("v60"), 250),
+                        new RecipeIngredient(IngredientRepository.get("мед"), 15),
+                        new RecipeIngredient(IngredientRepository.get("кардамон"), 5)
                 ),
                 "kenya", "filter", "hot"
         );
@@ -121,8 +121,8 @@ public class SampleData {
                 "Кокосове нітро",
                 List.of(
                         new RecipeIngredient(IngredientRepository.get("nitro_cold_brew"), 200),
-                        new RecipeIngredient(IngredientRepository.get("кокосова_вода"),   100),
-                        new RecipeIngredient(IngredientRepository.get("кокосовий_сироп"),  20)
+                        new RecipeIngredient(IngredientRepository.get("кокосова_вода"), 100),
+                        new RecipeIngredient(IngredientRepository.get("кокосовий_сироп"), 20)
                 ),
                 "colombia", "cold_brew", "cold"
         );
@@ -134,10 +134,10 @@ public class SampleData {
         Recipe blackForest = new Recipe(
                 "Black Forest Mocha",
                 List.of(
-                        new RecipeIngredient(IngredientRepository.get("espresso"),      50),
+                        new RecipeIngredient(IngredientRepository.get("espresso"), 50),
                         new RecipeIngredient(IngredientRepository.get("цільне_молоко"), 170),
                         new RecipeIngredient(IngredientRepository.get("темний_шоколад"), 20),
-                        new RecipeIngredient(IngredientRepository.get("вишня"),          30)
+                        new RecipeIngredient(IngredientRepository.get("вишня"), 30)
                 ),
                 "brazil", "espresso", "hot"
         );
@@ -149,10 +149,10 @@ public class SampleData {
         Recipe seaSaltCaramel = new Recipe(
                 "Морська солона карамель",
                 List.of(
-                        new RecipeIngredient(IngredientRepository.get("cold_brew"),      180),
+                        new RecipeIngredient(IngredientRepository.get("cold_brew"), 180),
                         new RecipeIngredient(IngredientRepository.get("солона_карамель"), 25),
-                        new RecipeIngredient(IngredientRepository.get("вівсяне_молоко"),  80),
-                        new RecipeIngredient(IngredientRepository.get("морська_сіль"),     2)
+                        new RecipeIngredient(IngredientRepository.get("вівсяне_молоко"), 80),
+                        new RecipeIngredient(IngredientRepository.get("морська_сіль"), 2)
                 ),
                 "colombia", "cold_brew", "cold"
         );

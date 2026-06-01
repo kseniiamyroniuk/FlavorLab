@@ -81,8 +81,7 @@ public class RecipeDetailView extends VBox {
                 infoChip(String.format("%.0f ккал", recipe.getCalories())),
                 infoChip(String.format("%.0f ₴", recipe.getCostUah())),
                 infoChip(CoffeeConstants.tempName(recipe.getTemperature())),
-                infoChip(CoffeeConstants.brewName(recipe.getBrewMethod())),
-                infoChip(String.format("☕ %.0f мг", profile.getCaffeine()))
+                infoChip(CoffeeConstants.brewName(recipe.getBrewMethod()))
         );
 
         // алергени. для кожного алергена робимо chip
@@ -111,7 +110,7 @@ public class RecipeDetailView extends VBox {
         RadarChart radar = new RadarChart(300);
         radar.draw(profile);
 
-        Label spicyLabel = new Label("🌶 Пряний акцент");
+        Label spicyLabel = new Label("Пряний акцент");
         spicyLabel.getStyleClass().add("small-label");
         spicyLabel.setStyle("-fx-text-fill: #e07b54;");
         spicyLabel.setVisible(profile.isSpicyAccent()); // не показувати елемент

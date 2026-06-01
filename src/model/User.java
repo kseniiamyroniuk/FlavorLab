@@ -35,11 +35,27 @@ public class User {
         return savedRecipes.contains(recipe);
     }
 
-    public String getName()              { return name; }
-    public String getAvatarPath()        { return avatarPath; }
-    public List<Recipe> getMyRecipes()   { return myRecipes; }
-    public List<Recipe> getSavedRecipes(){ return savedRecipes; }
+    public String getName() {
+        return name;
+    }
 
-    public void setName(String name)           { this.name = name; }
-    public void setAvatarPath(String path)     { this.avatarPath = path; }
+    public String getAvatarPath() {
+        return avatarPath;
+    }
+
+    public List<Recipe> getMyRecipes() {
+        return myRecipes;
+    }
+
+    public List<Recipe> getSavedRecipes() {
+        return savedRecipes;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAvatarPath(String path) {
+        this.avatarPath = path;
+    }
 }

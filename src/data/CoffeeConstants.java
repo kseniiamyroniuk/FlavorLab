@@ -11,7 +11,6 @@ public class CoffeeConstants {
     public static final Map<String, String> TEMP_UA = new LinkedHashMap<>();
     public static final Map<String, String> ORIGIN_UA = new LinkedHashMap<>();
 
-
     // Для конструктора рецепту (українська -> ключ)
 
     public static final Map<String, String> BREW_MAP = new LinkedHashMap<>();

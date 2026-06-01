@@ -23,11 +23,10 @@ public class FlavorEngine {
 
         // якщо обʼєм 0 -> повертаємо порожній профіль -- ніякого смаку
         if (effectiveVolume == 0) {
-            return new FlavorProfile(0,0,0,0,0,0,false);
+            return new FlavorProfile(0,0,0,0,0,false);
         }
 
         double[] result = new double[5]; // масив для результатів осей
-        double caffeine = 0;
         boolean spicy = false;
 
         // цикл по кожному інгредієнту (RecipeIngredient) рецепту
@@ -44,7 +43,7 @@ public class FlavorEngine {
             // чим більше -> тим більше цей інгредієнт впливає на кінцевий смак
             double weight = item.getVolumeMl() / effectiveVolume;
 
-            if (profile.getCaffeine() >= 35) { //дивимось чи багато кофеїну, щоб зрозуміти чи це кава, чи щось із вмістом кофеїну
+            if (ingredient.getCategory().equals("coffee")) { // для кави окремо рахуємо з модифікаторами
                 double[] origin = OriginModifier.get(recipe.getOrigin());
                 double[] brew = BrewModifier.get(recipe.getBrewMethod());
                 // отримуємо модифікатори смаку через походження зерен на метод заварювання
@@ -58,8 +57,7 @@ public class FlavorEngine {
             for (int i = 0; i < 5; i++) {
                 result[i] += values[i] * weight;
             }
-            // записуємо кофеїн та рахуємо чи буде напій з спеціями
-            caffeine += profile.getCaffeine() * weight;
+            // рахуємо чи буде напій з спеціями
             if (ingredient.getSpiciness() > 4) spicy = true;
         }
 
@@ -73,8 +71,7 @@ public class FlavorEngine {
         // повертаємо новий вирахуваний FlavorProfile напою
         return new FlavorProfile(
                 result[0], result[1], result[2],
-                result[3], result[4],
-                caffeine, spicy
+                result[3], result[4], spicy
         );
     }
 
@@ -92,8 +89,10 @@ public class FlavorEngine {
 
         // наскільки кожне число далеко від середнього
         double variance = 0;
-        for (double v : axes) variance += Math.pow(v - mean, 2); // сума відхилень кожного
-        double stddev = Math.sqrt(variance / axes.length); // Standard deviation -- стандартне відхилення
+        // сума відхилень кожного
+        for (double v : axes) variance += Math.pow(v - mean, 2);
+        double stddev = Math.sqrt(variance / axes.length);
+        // Standard deviation -- стандартне відхилення
         // stddev великий -- домінує один смак, stddev мелий -- збалансовано
 
         // ми ділимо відхилення на 5, бо 5 осей

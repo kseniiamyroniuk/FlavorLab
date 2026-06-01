@@ -73,7 +73,8 @@ public class RecipeBuilderView extends BorderPane {
 
         groupedRef = grouped;
 
-        search.textProperty().addListener((obs, old, val) -> buildCategoryList(categoryList, CATEGORIES, CATEGORY_NAMES, grouped, val));
+        search.textProperty().addListener((obs, old, val) ->
+                buildCategoryList(categoryList, CATEGORIES, CATEGORY_NAMES, grouped, val));
 
         ScrollPane scroll = new ScrollPane(categoryList);
         scroll.setFitToWidth(true);
