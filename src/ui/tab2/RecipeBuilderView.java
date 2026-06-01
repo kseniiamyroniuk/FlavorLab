@@ -392,10 +392,7 @@ public class RecipeBuilderView extends BorderPane {
 
         RecipeUtils.finalize(recipe);
 
-        User currentUser = UserRepository.getCurrentUser();
-        recipe.setAuthor(currentUser);
         RecipeRepository.add(recipe);
-        if (currentUser != null) currentUser.addRecipe(recipe);
 
         // скидаємо форму
         nameField.clear();

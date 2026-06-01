@@ -7,12 +7,6 @@ import java.util.List;
 public class SampleData {
 
     public static void load() {
-        User kseniia = new User("Kseniia", null);
-        User barista = new User("Barista Pro", null);
-        UserRepository.add(kseniia);
-        UserRepository.add(barista);
-        UserRepository.setCurrentUser(kseniia);
-
         Recipe flatWhite = new Recipe(
                 "Flat White",
                 List.of(
@@ -21,9 +15,8 @@ public class SampleData {
                 ),
                 "ethiopia", "espresso", "hot"
         );
-        flatWhite.setAuthor(barista);
-        flatWhite.addReview(new Review(kseniia, 5, "Дуже збалансований!"));
-        flatWhite.addReview(new Review(barista, 4, "Класика"));
+        flatWhite.setRating(4.3);
+        flatWhite.setRatingCount(5);
         RecipeUtils.finalize(flatWhite);
         RecipeRepository.add(flatWhite);
 
@@ -36,11 +29,10 @@ public class SampleData {
                 ),
                 "colombia", "cold_brew", "cold"
         );
-        mangoColdBrew.setAuthor(barista);
-        mangoColdBrew.addReview(new Review(barista, 5, "Тропічний вибух!"));
+        mangoColdBrew.setRating(3.9);
+        mangoColdBrew.setRatingCount(2);
         RecipeUtils.finalize(mangoColdBrew);
         RecipeRepository.add(mangoColdBrew);
-
 
         Recipe lavenderLatte = new Recipe(
                 "Лавандове Лате",
@@ -51,12 +43,10 @@ public class SampleData {
                 ),
                 "kenya", "espresso", "hot"
         );
-        lavenderLatte.setAuthor(barista);
-        lavenderLatte.addReview(new Review(kseniia, 4, "Дуже ароматний"));
+        lavenderLatte.setRating(4.8);
+        lavenderLatte.setRatingCount(2);
         RecipeUtils.finalize(lavenderLatte);
         RecipeRepository.add(lavenderLatte);
-        barista.saveRecipe(lavenderLatte);
-        kseniia.saveRecipe(lavenderLatte);
 
         Recipe raspberryCaramel = new Recipe(
                 "Малинова карамель",
@@ -68,8 +58,8 @@ public class SampleData {
                 ),
                 "ethiopia", "filter", "cold"
         );
-        raspberryCaramel.setAuthor(barista);
-        raspberryCaramel.addReview(new Review(barista, 5, "Неочікувано круто!"));
+        raspberryCaramel.setRating(4.4);
+        raspberryCaramel.setRatingCount(7);
         RecipeUtils.finalize(raspberryCaramel);
         RecipeRepository.add(raspberryCaramel);
 
@@ -83,8 +73,8 @@ public class SampleData {
                 ),
                 "ethiopia", "espresso", "cold"
         );
-        citrusTonic.setAuthor(barista);
-        citrusTonic.addReview(new Review(kseniia, 5, "Супер освіжає!"));
+        citrusTonic.setRating(2.3);
+        citrusTonic.setRatingCount(3);
         RecipeUtils.finalize(citrusTonic);
         RecipeRepository.add(citrusTonic);
 
@@ -97,11 +87,10 @@ public class SampleData {
                 ),
                 "brazil", "espresso", "hot"
         );
-        pistachioLatte.setAuthor(kseniia);
-        pistachioLatte.addReview(new Review(barista, 5, "Дуже creamy"));
+        pistachioLatte.setRating(3.3);
+        pistachioLatte.setRatingCount(5);
         RecipeUtils.finalize(pistachioLatte);
         RecipeRepository.add(pistachioLatte);
-        kseniia.addRecipe(pistachioLatte);
 
         Recipe honeyCardamom = new Recipe(
                 "Медовий кардамоновий V60",
@@ -112,8 +101,8 @@ public class SampleData {
                 ),
                 "kenya", "filter", "hot"
         );
-        honeyCardamom.setAuthor(barista);
-        honeyCardamom.addReview(new Review(kseniia, 4, "Дуже пряний aftertaste"));
+        honeyCardamom.setRating(2.9);
+        honeyCardamom.setRatingCount(9);
         RecipeUtils.finalize(honeyCardamom);
         RecipeRepository.add(honeyCardamom);
 
@@ -126,8 +115,8 @@ public class SampleData {
                 ),
                 "colombia", "cold_brew", "cold"
         );
-        coconutNitro.setAuthor(barista);
-        coconutNitro.addReview(new Review(barista, 5, "Літній вайб"));
+        coconutNitro.setRating(4.6);
+        coconutNitro.setRatingCount(7);
         RecipeUtils.finalize(coconutNitro);
         RecipeRepository.add(coconutNitro);
 
@@ -141,8 +130,8 @@ public class SampleData {
                 ),
                 "brazil", "espresso", "hot"
         );
-        blackForest.setAuthor(barista);
-        blackForest.addReview(new Review(kseniia, 5, "Смакує як десерт"));
+        blackForest.setRating(4.3);
+        blackForest.setRatingCount(5);
         RecipeUtils.finalize(blackForest);
         RecipeRepository.add(blackForest);
 
@@ -156,8 +145,8 @@ public class SampleData {
                 ),
                 "colombia", "cold_brew", "cold"
         );
-        seaSaltCaramel.setAuthor(barista);
-        seaSaltCaramel.addReview(new Review(barista, 5, "Balanced sweet & salty"));
+        seaSaltCaramel.setRating(4.4);
+        seaSaltCaramel.setRatingCount(6);
         RecipeUtils.finalize(seaSaltCaramel);
         RecipeRepository.add(seaSaltCaramel);
     }

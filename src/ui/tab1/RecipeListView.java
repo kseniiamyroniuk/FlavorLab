@@ -1,7 +1,6 @@
 package ui.tab1;
 
 import data.RecipeRepository;
-import data.UserRepository;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -12,7 +11,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import model.Recipe;
-import model.User;
 import ui.common.RecipeDetailView;
 
 import java.util.List;
@@ -55,31 +53,18 @@ public class RecipeListView extends BorderPane {
     private void loadCards(String query) {
         cardsPane.getChildren().clear();
 
-        User currentUser = UserRepository.getCurrentUser();
-
         List<Recipe> all = query.isBlank()
                 ? RecipeRepository.getAll()
                 : RecipeRepository.search(query);
 
-        // фільтруємо - прибираємо мої та збережені
-        //
-        List<Recipe> filtered = all.stream()
-                .filter(r -> {
-                    if (currentUser == null) return true;
-                    boolean isMine   = currentUser.getMyRecipes().contains(r);
-                    boolean isSaved  = currentUser.hasSaved(r);
-                    return !isMine && !isSaved;
-                })
-                .collect(java.util.stream.Collectors.toList());
-
         // рандомний порядок щоразу
-        java.util.Collections.shuffle(filtered);
+        java.util.Collections.shuffle(all);
 
-        for (Recipe recipe : filtered) {
+        for (Recipe recipe : all) {
             cardsPane.getChildren().add(makeCard(recipe));
         }
 
-        if (filtered.isEmpty()) {
+        if (all.isEmpty()) {
             Label empty = new Label("Немає нових рецептів для перегляду");
             empty.getStyleClass().add("small-label");
             cardsPane.getChildren().add(empty);
@@ -91,7 +76,7 @@ public class RecipeListView extends BorderPane {
         name.setStyle("-fx-font-size: 15px; -fx-font-weight: bold;");
 
         // рейтинг
-        double rating = recipe.averageRating();
+        double rating = recipe.getRating();
         String stars = rating == 0 ? "Немає оцінок" : String.format("★ %.1f", rating);
         Label ratingLabel = new Label(stars);
         ratingLabel.getStyleClass().add("small-label");

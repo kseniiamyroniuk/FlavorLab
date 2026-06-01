@@ -16,13 +16,13 @@ public class RecipeUtils {
 
     // Калорії та ціна
     public static void calcNutrition(Recipe recipe) {
-        double totalCal  = 0;
+        double totalCal = 0;
         double totalCost = 0;
 
         for (RecipeIngredient ri : recipe.getIngredients()) {
             Ingredient ing = ri.getIngredient();
             if (ing == null) continue;
-            totalCal  += ing.calcCalories(ri.getVolumeMl());
+            totalCal += ing.calcCalories(ri.getVolumeMl());
             totalCost += ing.calcCost(ri.getVolumeMl());
         }
 
@@ -41,20 +41,20 @@ public class RecipeUtils {
     }
 
     private static void addAllergens(Recipe recipe, Ingredient ing) {
-        String key      = ing.getKey();
+        String key = ing.getKey();
         String category = ing.getCategory();
 
         switch (category) {
             case "milk" -> {
                 if (key.equals("соєве_молоко")) {
                     recipe.addAllergen("соя");
-                } else if (key.equals("мигдальне_молоко")  ||
-                        key.equals("фундукове_молоко")   ||
+                } else if (key.equals("мигдальне_молоко") ||
+                        key.equals("фундукове_молоко") ||
                         key.equals("макадамієве_молоко") ||
                         key.equals("фісташкове_молоко")) {
                     recipe.addAllergen("горіхи");
                 } else if (!key.equals("кокосове_молоко") &&
-                        !key.equals("кокосові_вершки")  &&
+                        !key.equals("кокосові_вершки") &&
                         !key.equals("рисове_молоко")) {
                     recipe.addAllergen("молоко");
                 }
@@ -67,9 +67,9 @@ public class RecipeUtils {
                 }
             }
             case "syrup" -> {
-                if (key.equals("фундук")  ||
+                if (key.equals("фундук") ||
                         key.equals("мигдаль") ||
-                        key.equals("фісташка")||
+                        key.equals("фісташка") ||
                         key.equals("арахіс")) {
                     recipe.addAllergen("горіхи");
                 }

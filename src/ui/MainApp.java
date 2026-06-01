@@ -9,7 +9,6 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import ui.tab1.RecipeListView;
 import ui.tab2.RecipeBuilderView;
-import ui.tab3.ProfileView;
 
 public class MainApp extends Application {
 
@@ -23,20 +22,17 @@ public class MainApp extends Application {
 
         RecipeListView recipeListView = new RecipeListView();
         RecipeBuilderView builderView = new RecipeBuilderView();
-        ProfileView profileView = new ProfileView();
 
         Tab tab1 = new Tab("Меню", recipeListView);
         Tab tab2 = new Tab("Рецепт", builderView);
-        Tab tab3 = new Tab("Профіль", profileView);
 
         TabPane tabPane = new TabPane();
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
-        tabPane.getTabs().addAll(tab1, tab2, tab3);
+        tabPane.getTabs().addAll(tab1, tab2);
 
         // оновлення при перемиканні вкладок
         tabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
             if (newTab == tab1) recipeListView.refresh();
-            if (newTab == tab3) profileView.refresh();
         });
 
         Scene scene = new Scene(tabPane, 900, 700);
@@ -51,7 +47,5 @@ public class MainApp extends Application {
 
     public static void main(String[] args) {
         launch(args);
-
-
     }
 }

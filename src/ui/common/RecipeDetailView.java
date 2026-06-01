@@ -1,17 +1,16 @@
 package ui.common;
 
 import data.CoffeeConstants;
-import data.UserRepository;
 import engine.FlavorEngine;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import model.*;
+import model.FlavorProfile;
+import model.Recipe;
+import model.RecipeIngredient;
 import ui.tab1.RecipeListView;
-import ui.tab3.ProfileView;
-
 
 public class RecipeDetailView extends VBox {
     private final FlavorEngine engine = new FlavorEngine();
@@ -24,14 +23,6 @@ public class RecipeDetailView extends VBox {
         init(recipe, back);
     }
 
-    // конструктор для використання у ProfileView
-    public RecipeDetailView(Recipe recipe, ProfileView parent) {
-        Button back = new Button("← Назад");
-        back.getStyleClass().add("secondary-button");
-        back.setOnAction(e -> parent.showProfile());
-        init(recipe, back);
-    }
-
     private void init(Recipe recipe, Button back) {
         setSpacing(16);
         setPadding(new Insets(20));
@@ -40,40 +31,17 @@ public class RecipeDetailView extends VBox {
         Label title = new Label(recipe.getName()); // назва рецепту
         title.getStyleClass().add("title-label");
 
-        String authorName = recipe.getAuthor() != null
-                ? recipe.getAuthor().getName() : "Невідомо";
-        Label author = new Label("Автор: " + authorName);
-        author.getStyleClass().add("small-label");
-
-        double rating = recipe.averageRating();
+        double rating = recipe.getRating();
         Label ratingLabel = new Label(rating == 0
                 ? "Оцінок немає"
-                : String.format("★ %.1f  (%d відгуків)", rating, recipe.getReviews().size()));
+                : String.format("★ %.1f", rating));
         //якщо оцінка 0, то пишемо що оцінок немає, інакше пишемо середню оцінку у кількість відгуків
         ratingLabel.getStyleClass().add("subtitle-label");
 
-        // логіка відображення кнопки збережено та зберігання/видалення з улюблених рецепту
-        User currentUser = UserRepository.getCurrentUser();
-        boolean isSaved = currentUser != null && currentUser.hasSaved(recipe);
-        Button saveBtn = new Button(isSaved ? "♥ Збережено" : "♡ Зберегти");
-        saveBtn.getStyleClass().add("secondary-button");
-        saveBtn.setOnAction(e -> {
-            if (currentUser == null) return;
-            if (currentUser.hasSaved(recipe)) {
-                currentUser.unsaveRecipe(recipe);
-                saveBtn.setText("♡ Зберегти");
-                saveBtn.getStyleClass().remove("saved-button");
-            } else {
-                currentUser.saveRecipe(recipe);
-                saveBtn.setText("♥ Збережено");
-                saveBtn.getStyleClass().add("saved-button");
-            }
-        });
 
-        HBox topRow = new HBox(12, title, saveBtn);
+        HBox topRow = new HBox(12, title);
         topRow.setAlignment(Pos.CENTER_LEFT);
 
-        // рахуємо кофеїн
         FlavorProfile profile = engine.calculate(recipe);
 
         // інформація загальна про напій
@@ -116,39 +84,15 @@ public class RecipeDetailView extends VBox {
         spicyLabel.setVisible(profile.isSpicyAccent()); // не показувати елемент
         spicyLabel.setManaged(profile.isSpicyAccent()); // прибрати місце в layout
 
-        Label reviewsTitle = new Label("Відгуки");
-        reviewsTitle.getStyleClass().add("subtitle-label");
-
-        // існуючі відгуки
-        VBox reviewsList = new VBox(8);
-        if (recipe.getReviews().isEmpty()) {
-            Label noReviews = new Label("Відгуків ще немає");
-            noReviews.getStyleClass().add("small-label");
-            reviewsList.getChildren().add(noReviews);
-        } else {
-            for (Review r : recipe.getReviews()) {
-                VBox reviewCard = new VBox(4);
-                Label reviewAuthor = new Label(r.getAuthor().getName()
-                        + "  " + "★".repeat(r.getRating()));
-                Label reviewText = new Label(r.getComment());
-                reviewCard.getStyleClass().add("review-card");
-                reviewAuthor.getStyleClass().add("review-author");
-                reviewText.getStyleClass().add("review-text");
-                reviewCard.getChildren().addAll(reviewAuthor, reviewText);
-                reviewsList.getChildren().add(reviewCard);
-            }
-        }
-
         VBox content = new VBox(16,
-                back, topRow, author, ratingLabel,
+                back, topRow, ratingLabel,
                 new Separator(),
                 infoRow, allergenRow,
                 new Separator(),
                 ingredientsTitle, ingredientsList,
                 new Separator(),
                 radarTitle, radar, spicyLabel,
-                new Separator(),
-                reviewsTitle, reviewsList
+                new Separator()
         );
         content.setPadding(new Insets(4));
 
@@ -156,93 +100,58 @@ public class RecipeDetailView extends VBox {
         scroll.setFitToWidth(true);
         scroll.setStyle("-fx-background-color: transparent; -fx-background: transparent;");
 
+        Label addReviewTitle = new Label("Залишити оцінку");
+        addReviewTitle.getStyleClass().add("subtitle-label");
 
-        if (currentUser != null) {
-            Label addReviewTitle = new Label("Залишити відгук");
-            addReviewTitle.getStyleClass().add("subtitle-label");
+        ToggleGroup starGroup = new ToggleGroup();
+        HBox stars = new HBox(4);
 
-            // зірки
-            ToggleGroup starGroup = new ToggleGroup();
-            HBox stars = new HBox(4);
-            for (int i = 1; i <= 5; i++) {
-                ToggleButton star = new ToggleButton("★");
-                star.setToggleGroup(starGroup);
-                star.setUserData(i);
-                star.setStyle(
-                        "-fx-background-color: transparent; -fx-text-fill: #C5D86D;" +
-                                "-fx-font-size: 22px; -fx-cursor: hand; -fx-padding: 0 2;"
-                );
-                star.selectedProperty().addListener((obs, old, sel) ->
-                        star.setStyle(
-                                "-fx-background-color: transparent;" +
-                                        "-fx-text-fill: " + (sel ? "#FFD700" : "#C5D86D") + ";" +
-                                        "-fx-font-size: 22px; -fx-cursor: hand; -fx-padding: 0 2;"
-                        )
-                );
-                stars.getChildren().add(star);
+        for (int i = 1; i <= 5; i++) {
+            ToggleButton star = new ToggleButton("★");
+            star.setToggleGroup(starGroup);
+            star.setUserData(i);
+            stars.getChildren().add(star);
+
+            star.setStyle("-fx-background-color: transparent; -fx-text-fill: #C5D86D; -fx-font-size: 22px; -fx-cursor: hand; -fx-padding: 0 2;");
+        }
+        starGroup.selectedToggleProperty().addListener((obs, old, newToggle) -> {
+            int createdRating = newToggle != null ? (int) newToggle.getUserData() : 0;
+            stars.getChildren().forEach(node -> {
+                ToggleButton btn = (ToggleButton) node;
+                String color = (int) btn.getUserData() <= createdRating ? "#FFD700" : "#C5D86D";
+                btn.setStyle("-fx-background-color: transparent; -fx-text-fill: " + color + "; -fx-font-size: 22px; -fx-cursor: hand; -fx-padding: 0 2;");
+            });
+        });
+
+        Label errorLabel = new Label();
+        errorLabel.setStyle("-fx-text-fill: #e07b54; -fx-font-size: 12px;");
+
+        Button submitBtn = new Button("Опублікувати");
+        submitBtn.getStyleClass().add("primary-button");
+        submitBtn.setOnAction(e -> {
+            Toggle selected = starGroup.getSelectedToggle();
+            if (selected == null) {
+                errorLabel.setText("Обери рейтинг");
+                return;
             }
 
-            // текст
-            TextArea commentField = new TextArea();
-            commentField.setPromptText("Твій коментар...");
-            commentField.setPrefRowCount(2);
-            commentField.setWrapText(true);
-            commentField.setStyle(
-                    "-fx-background-color: #F8FBEF; -fx-text-fill: #4F5D2F;" +
-                            "-fx-border-color: #C5D86D; -fx-border-radius: 10;" +
-                            "-fx-background-radius: 10; -fx-padding: 8 12;"
-            );
+            int userRating = (int) selected.getUserData();
+            int newCount = recipe.getRatingCount() + 1;
+            double newRating = (recipe.getRating() * recipe.getRatingCount() + userRating) / newCount;
+            recipe.setRating(newRating);
+            recipe.setRatingCount(newCount);
+            ratingLabel.setText(String.format("★ %.1f", newRating));
 
-            Label errorLabel = new Label();
-            errorLabel.setStyle("-fx-text-fill: #e07b54; -fx-font-size: 12px;");
+            starGroup.selectToggle(null);
+            errorLabel.setText("");
+        });
 
-            Button submitBtn = new Button("Опублікувати");
-            submitBtn.getStyleClass().add("primary-button");
-            submitBtn.setOnAction(e -> {
-                Toggle selected = starGroup.getSelectedToggle();
-                if (selected == null) {
-                    errorLabel.setText("Обери рейтинг");
-                    return;
-                }
-                String comment = commentField.getText().trim();
+        VBox reviewForm = new VBox(10,
+                addReviewTitle,
+                stars, errorLabel, submitBtn
+        );
 
-                int rating2 = (int) selected.getUserData();
-                Review newReview = new Review(currentUser, rating2, comment);
-                recipe.addReview(newReview);
-
-                // оновлюємо список відгуків
-                reviewsList.getChildren().clear();
-                for (Review r : recipe.getReviews()) {
-                    VBox reviewCard = new VBox(4);
-                    Label reviewAuthor = new Label(r.getAuthor().getName()
-                            + "  " + "★".repeat(r.getRating()));
-                    Label reviewText = new Label(r.getComment());
-                    reviewCard.getStyleClass().add("review-card");
-                    reviewAuthor.getStyleClass().add("review-author");
-                    reviewText.getStyleClass().add("review-text");
-                    reviewCard.getChildren().addAll(reviewAuthor, reviewText);
-                    reviewsList.getChildren().add(reviewCard);
-                }
-
-                // оновлюємо рейтинг
-                double newRating = recipe.averageRating();
-                ratingLabel.setText(String.format("★ %.1f  (%d відгуків)",
-                        newRating, recipe.getReviews().size()));
-
-                // скидаємо форму
-                starGroup.selectToggle(null);
-                commentField.clear();
-                errorLabel.setText("");
-            });
-
-            VBox reviewForm = new VBox(10,
-                    new Separator(),
-                    addReviewTitle,
-                    stars, commentField, errorLabel, submitBtn
-            );
-
-            content.getChildren().add(reviewForm);
-        }
+        content.getChildren().add(reviewForm);
 
         getChildren().add(scroll);
     }
